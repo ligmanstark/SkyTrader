@@ -25,4 +25,6 @@ dist-ssr
 
 /public/index.html
 /build/
+
+#удалить позже
 /src/assets/skypro_02

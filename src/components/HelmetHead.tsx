@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet';
 import { useLocation } from 'react-router-dom';
 import { ThumbnailDefault } from '../assets/img/seo';
 
+
 interface Props {
   title: string;
   descr: string;
