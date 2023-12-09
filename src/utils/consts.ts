@@ -1,6 +1,9 @@
 // ROUTES
 export const MAIN_ROUTE = '/';
 export const ABOUT_ROUTE = '/about';
+export const PROFILE_ROUTE = '/profile';
+ export const LOGIN_ROUTE = '/login';
+export const REGISTER_ROUTE = '/register';
 export const NOT_FOUND_ROUTE = '*';
 
 // BREAKPOINTS
