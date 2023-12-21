@@ -43,7 +43,7 @@ export const Search = ({ hasError, onSubmit }: TSearch) => {
 					}}
 				/>
 				{hasError && <S.Error>Отсутствуют результаты</S.Error>}
-				<Button onClick={handleSubmit}>Найти</Button>
+				<Button $color onClick={handleSubmit}>Найти</Button>
 			</div>
 		</InputField>
 	);
