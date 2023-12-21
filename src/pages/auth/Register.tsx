@@ -3,7 +3,7 @@ import { InputField } from '../../components/form/InputField';
 import { Input } from '../../components/form/Input';
 import { Button } from '../../components/form/Button';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import * as S from './style';
 import { LogoPic } from '../../assets/img/index';
 import { LOGIN_ROUTE } from '../../utils/consts';
@@ -34,7 +34,7 @@ export const Register: FC = () => {
 				<InputField error={errors.email?.message}>
 					<Input
 						{...register('email', {
-							required: 'Почта обязательна',
+							required: 'Заполните данное поле',
 							pattern: {
 								value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
 								message: 'Некорректный адрес электронной почты',
@@ -47,7 +47,7 @@ export const Register: FC = () => {
 					<Input
 						type="password"
 						{...register('password', {
-							required: 'Пароль обязательна',
+							required: 'Заполните данное поле',
 							minLength: {
 								value: 6,
 								message: 'Пароль должен содержать минимум 7 символов',
@@ -71,7 +71,7 @@ export const Register: FC = () => {
 							validate: (value) =>
 								value === getValues('password') ||
 								'Пароли не совпадают',
-							required: 'Повтор пароля обязателено',
+							required: 'Заполните данное поле',
 						})}
 						placeholder="Repeat Password"
 					/>
