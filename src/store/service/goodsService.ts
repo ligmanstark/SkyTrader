@@ -129,6 +129,7 @@ export const goodsApi = createApi({
 	}),
 });
 
+
 export const {
 	useGetAllGoodsQuery,
 	useGetAllUsersQuery,
