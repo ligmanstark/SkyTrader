@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { Container } from '../../../styled/components';
 import { Button } from '../../../components/form/Button';
 import { useLocation } from 'react-router-dom';
+import { BackUp } from '../../../assets/img/index';
 export const Footer: FC = () => {
 	const { pathname } = useLocation();
 	const scrollPageUp = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -20,7 +21,9 @@ export const Footer: FC = () => {
 			) : (
 				<Wrapper>
 					<Container>
-						<Button onClick={scrollPageUp}>Вверх</Button>
+							<button onClick={scrollPageUp}>
+								<BackUp/>
+						</button>
 					</Container>
 				</Wrapper>
 			)}
@@ -28,4 +31,6 @@ export const Footer: FC = () => {
 	);
 };
 
-const Wrapper = styled.footer``;
+const Wrapper = styled.footer`
+	background-color: #f5f5f5;
+`;

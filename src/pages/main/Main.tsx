@@ -1,24 +1,22 @@
 import { FC } from 'react';
 import { Container } from '../../styled/components';
 import { HelmetHead } from '../../components/HelmetHead';
-import { Search } from '../../components/form/search/Search';
+import { Search } from '../../components/search/Search';
 // import { Loader } from '../../components/plug/Loader';
-import {
-	useGetAllGoodsQuery,
-	useGetAllUsersQuery,
-} from '../../store/service/goodsService';
+import { useDispatch } from 'react-redux';
+import { setGoods } from '../../store/slices/goodsSlice';
+import { useGetAllGoodsQuery } from '../../store/service/goodsService';
 import { Logomini } from '../../assets/img/index';
 import * as S from './style';
 import { useEffect } from 'react';
+import { GoodsList } from '../../components/goodsList/GoodsList';
 const Main: FC = () => {
-	const { data = [], error, isLoading } = useGetAllGoodsQuery();
-	// const { data = [], error, isLoading } = useGetAllUsersQuery();
+	const dispatch = useDispatch();
+	const { data = [], isLoading } = useGetAllGoodsQuery();
 
-	console.log(data, error);
 	useEffect(() => {
-		console.log('error =', error);
-		console.log(isLoading);
-	}, [error]);
+		dispatch(setGoods(data));
+	}, [isLoading]);
 
 	return (
 		<>
@@ -44,6 +42,7 @@ const Main: FC = () => {
 							<S.TitleBlockH1>Объявления</S.TitleBlockH1>
 						</>
 					</S.TitleBlock>
+					<GoodsList/>
 				</Container>
 			</S.Main>
 		</>

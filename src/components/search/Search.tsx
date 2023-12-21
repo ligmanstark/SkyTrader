@@ -39,13 +39,11 @@ export const Search = ({ hasError, onSubmit }: TSearch) => {
 					placeholder="    Поиск по объявлениям"
 					style={{
 						width: '80%',
-						padding: '0',
+						padding:'0'
 					}}
 				/>
 				{hasError && <S.Error>Отсутствуют результаты</S.Error>}
-				<Button $color onClick={handleSubmit}>
-					Найти
-				</Button>
+				<Button $color onClick={handleSubmit}>Найти</Button>
 			</div>
 		</InputField>
 	);
