@@ -8,15 +8,7 @@ export const goodsApi = createApi({
 	tagTypes: ['Users', 'Goods'],
 	baseQuery: fetchBaseQuery({
 		baseUrl: BASE_URL,
-		mode: 'no-cors',
-		// prepareHeaders: (headers, { getState }) => {
-		// 	const token = (getState() as RootState).goodsApi.;
-
-		// 	if (token) {
-		// 		headers.set('authorization', `Bearer ${token}`);
-		// 	}
-		// 	return headers;
-		// },
+ 
 	}),
 	endpoints: (builder) => ({
 		getAllGoods: builder.query<T.TGoods[], void>({
