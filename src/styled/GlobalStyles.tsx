@@ -47,6 +47,7 @@ export const GlobalStyles: FC = () => (
         display: grid;
         grid-template-rows: auto 1fr auto;
         min-height: 100vh;
+        --error-color: #F74646;
       }
     `}
   />

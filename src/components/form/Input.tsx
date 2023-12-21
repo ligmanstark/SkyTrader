@@ -4,6 +4,7 @@ import { $mainFontColor } from '../../styled/variables';
 export const Input = styled.input`
 	width: 100%;
 	padding: 0 0 0.5rem;
+	border-radius: 0.25rem;
 	border-bottom: 0.0625rem solid #d0cece;
 	color: ${$mainFontColor};
 	font-variant-numeric: lining-nums proportional-nums;
