@@ -34,7 +34,7 @@ export const Buttons = styled.div``;
 export const SellerBox = styled.div`
 display: flex;
     flex-direction: row;
-}`;
+`;
 export const SubSellerBox = styled.div``;
 
 export const SellerName = styled.p`

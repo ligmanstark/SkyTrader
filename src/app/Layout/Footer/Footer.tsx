@@ -19,10 +19,10 @@ export const Footer: FC = () => {
 			{pathname === '/register' || pathname === '/login' ? (
 				''
 			) : (
-				<Wrapper>
+				<Wrapper style={{ marginTop: '1rem' }}>
 					<Container>
-							<button onClick={scrollPageUp}>
-								<BackUp/>
+						<button onClick={scrollPageUp}>
+							<BackUp />
 						</button>
 					</Container>
 				</Wrapper>

@@ -4,7 +4,7 @@ export type TGoodsState = {
 	data: T.TGoods[];
 	searchRef?: string;
 	searchData?: T.TGoods[];
-	currentState?:T.TGoods[];
+	currentState:T.TGoods;
 
 	status?: 'idle' | 'loading' | 'succeeded' | 'failed';
 	error?: string | undefined;

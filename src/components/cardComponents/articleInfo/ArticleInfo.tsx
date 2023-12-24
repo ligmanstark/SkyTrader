@@ -3,6 +3,7 @@ import * as S from './style';
 import { TGoods } from '../../../store/service/types/TGoods';
 import { Button } from '../../form/Button';
 import { BASE_URL } from '../../../utils/consts';
+import { Link } from 'react-router-dom';
 export const ArticleInfo: FC<TGoods> = (props) => {
 	const [showPhone, isShowPhone] = useState(false);
 	const { title, price, created_on, user } = props;
@@ -49,8 +50,15 @@ export const ArticleInfo: FC<TGoods> = (props) => {
 				<S.SellerBox>
 					<S.SellerImg src={`${BASE_URL}/${user.avatar}`} />
 					<S.SubSellerBox>
-						<S.SellerName>{user.name}</S.SellerName>
-						<S.SellerStartSells>{`Продает товары с ${startSells}`}</S.SellerStartSells>
+						<Link
+							to={`/profile/${user.id}`}
+							style={{
+								textDecoration: 'none',
+							}}
+						>
+							<S.SellerName>{user.name}</S.SellerName>
+							<S.SellerStartSells>{`Продает товары с ${startSells}`}</S.SellerStartSells>
+						</Link>
 					</S.SubSellerBox>
 				</S.SellerBox>
 			</S.SellsBox>

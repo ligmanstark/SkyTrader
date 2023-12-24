@@ -5,13 +5,13 @@ import { DescriptionShow } from './descriptionShow/DescriptionShow';
 import { ArticleInfo } from './articleInfo/ArticleInfo';
 import { useParams } from 'react-router-dom';
 import { useLazyGetByIdGoodQuery } from '../../store/service/goodsService';
-import { useDispatch } from 'react-redux';
-import { setCurrentState } from '../../store/slices/goodsSlice';
 import { TGoods } from '../../store/service/types/TGoods';
+import { useDispatch } from 'react-redux';
+import { setCurrentStateDate } from '../../store/slices/goodsSlice';
 export const CardComponents: FC = () => {
+	const dispatch = useDispatch();
 	const [currentState, setCurrentState] = useState<TGoods>();
 	console.log(currentState);
-	const dispatch = useDispatch();
 	const { id } = useParams();
 	const [fetchSearch] = useLazyGetByIdGoodQuery();
 	console.log(id);
@@ -20,6 +20,7 @@ export const CardComponents: FC = () => {
 			.unwrap()
 			.then((data) => {
 				setCurrentState(data);
+				dispatch(setCurrentStateDate(data));
 			})
 			.catch((err) => alert(err));
 	}, [id]);

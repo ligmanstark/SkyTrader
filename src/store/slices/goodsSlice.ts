@@ -26,12 +26,12 @@ const goodsSlice = createSlice({
 				state.searchData = [];
 			}
 		},
-		setCurrentState(state, action) {
+		setCurrentStateDate(state, action) {
 			state.currentState = action.payload;
 		},
 	},
 });
-export const { setGoods, setSearchRef, setSearchGood, setCurrentState } =
+export const { setGoods, setSearchRef, setSearchGood, setCurrentStateDate } =
 	goodsSlice.actions;
 
 export default goodsSlice.reducer;
