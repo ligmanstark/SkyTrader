@@ -29,7 +29,9 @@ const Main: FC = () => {
 
 	const fetchGood = () => {
 		if (searchRef !== '') {
-			const searchDataID: number = searchID(data, searchRef).id;
+			console.log(searchID(data, searchRef));
+			const searchDataID: number = searchID(data, searchRef)[0].id;
+			console.log(searchID(data, searchRef));
 			fetchSearch(searchDataID)
 				.unwrap()
 				.then((data) => {

@@ -7,8 +7,20 @@ export const ImageShow: FC<TGoods> = (props) => {
 
 	return (
 		<S.Box>
-			<S.BigImage src={`${BASE_URL}/${images[0].url}`} alt="" />
-			<S.SmallBox>{images.length > 1 ? images.map(el => <S.SmallImage src={`${BASE_URL}/${el.url}`} />)   : ''}</S.SmallBox>
+			{images.length > 0 ? (
+				<>
+					<S.BigImage src={`${BASE_URL}/${images[0].url}`} alt="" />
+					<S.SmallBox>
+						{images.length > 1
+							? images.map((el) => (
+									<S.SmallImage src={`${BASE_URL}/${el.url}`} />
+ ))
+							: ''}
+					</S.SmallBox>
+				</>
+			) : (
+				<S.BigImage src="../src/assets/img/withoutImg.jpeg" alt="" />
+			)}
 		</S.Box>
 	);
 };
