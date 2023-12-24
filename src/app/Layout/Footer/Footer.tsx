@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import { FC } from 'react';
 import { Container } from '../../../styled/components';
-import { Button } from '../../../components/form/Button';
 import { useLocation } from 'react-router-dom';
 import { BackUp } from '../../../assets/img/index';
 export const Footer: FC = () => {

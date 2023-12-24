@@ -5,13 +5,13 @@ enum Role {
 
 export type TRegisterUserReq = {
 	password: string;
-	role: Role;
+	role?: Role;
 	email: string;
 	name: string;
-	surname: string;
-	phone: string;
-	city: string;
-	id: number | null;
+	surname?: string;
+	phone?: string;
+	city?: string;
+	id?: number | null;
 };
 
 // {

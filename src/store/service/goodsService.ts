@@ -1,8 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import * as T from './types/index';
 import { BASE_URL } from '../../utils/consts';
-import { RootState } from '../store';
-
+ 
 export const goodsApi = createApi({
 	reducerPath: 'goodsApi',
 	tagTypes: ['Users', 'Goods'],
@@ -26,7 +25,7 @@ export const goodsApi = createApi({
 								id,
 							})),
 							{ type: 'Goods', id: 'LIST' },
-	]
+]
 					: [{ type: 'Goods', id: 'LIST' }],
 		}),
 		getByIdGood: builder.query<T.TGoods, number>({
@@ -54,13 +53,10 @@ export const goodsApi = createApi({
 								id,
 							})),
 							{ type: 'Users', id: 'LIST' },
-]
+ ]
 					: [{ type: 'Users', id: 'LIST' }],
 		}),
-		setRegisterUser: builder.mutation<
-			T.TRegisterUser,
-			{ body: T.TRegisterUserReq }
-		>({
+		setRegisterUser: builder.mutation<T.TRegisterUser,{ body: T.TRegisterUserReq }>({
 			query: ({ body }) => ({
 				url: '/auth/register',
 				method: 'POST',
@@ -100,10 +96,7 @@ export const goodsApi = createApi({
 				},
 			}),
 		}),
-		updateUser: builder.mutation<
-			T.TUpdateUser,
-			{ body: T.TUpdateUserReq; accessToken: string }
-		>({
+		updateUser: builder.mutation<T.TUpdateUser,{ body: T.TUpdateUserReq; accessToken: string }>({
 			query: ({ body, accessToken }) => ({
 				url: '/user',
 				method: 'PATCH',
@@ -114,10 +107,7 @@ export const goodsApi = createApi({
 				},
 			}),
 		}),
-		updatePassword: builder.mutation<
-			T.TUpdatePassword,
-			{ body: T.TUpdatePasswordReq; accessToken: string }
-		>({
+		updatePassword: builder.mutation<T.TUpdatePassword,{ body: T.TUpdatePasswordReq; accessToken: string }>({
 			query: ({ body, accessToken }) => ({
 				url: '/user/password',
 				method: 'PUT',
@@ -128,10 +118,7 @@ export const goodsApi = createApi({
 				},
 			}),
 		}),
-		updateUserAvatar: builder.mutation<
-			object,
-			{ body: FormData; accessToken: string }
-		>({
+		updateUserAvatar: builder.mutation<object,{ body: FormData; accessToken: string }>({
 			query: ({ body, accessToken }) => ({
 				url: '/user/avatar',
 				method: 'POST',
@@ -158,4 +145,6 @@ export const {
 	useUpdatePasswordMutation,
 	useUpdateUserAvatarMutation,
 	useLazyGetByIdGoodQuery,
+	useGetUserQuery,
+	useLazyGetUserQuery
 } = goodsApi;
