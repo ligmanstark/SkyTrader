@@ -1,4 +1,12 @@
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
+
+export const Wrapper = styled.div`
+	cursor: pointer;
+	outline: none;
+	text-decoration: none;
+	color: black;
+`;
 
 export const Image = styled.img`
 	max-width: 16rem;
@@ -24,8 +32,7 @@ export const Description = styled.div`
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
-    font-size: 1.5rem;
-
+	font-size: 1.5rem;
 `;
 
 export const Title = styled.div`
@@ -34,6 +41,5 @@ export const Title = styled.div`
 `;
 
 export const UserInfo = styled.div`
-font-size: 1rem;
-
-`
+	font-size: 1rem;
+`;

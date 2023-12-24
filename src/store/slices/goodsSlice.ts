@@ -5,6 +5,7 @@ const initialState: T.TGoodsState = {
 	data: [],
 	searchData: [],
 	searchRef: '',
+	currentState: [],
 };
 
 const goodsSlice = createSlice({
@@ -25,8 +26,12 @@ const goodsSlice = createSlice({
 				state.searchData = [];
 			}
 		},
+		setCurrentState(state, action) {
+			state.currentState = action.payload;
+		},
 	},
 });
-export const { setGoods, setSearchRef, setSearchGood } = goodsSlice.actions;
+export const { setGoods, setSearchRef, setSearchGood, setCurrentState } =
+	goodsSlice.actions;
 
 export default goodsSlice.reducer;

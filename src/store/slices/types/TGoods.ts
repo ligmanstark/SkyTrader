@@ -1,4 +1,4 @@
-interface IImages {
+export interface IImages {
 	id: number;
 	ad_id: number;
 	url: string | undefined;

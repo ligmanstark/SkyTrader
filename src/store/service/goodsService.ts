@@ -26,10 +26,10 @@ export const goodsApi = createApi({
 								id,
 							})),
 							{ type: 'Goods', id: 'LIST' },
-					  ]
+	]
 					: [{ type: 'Goods', id: 'LIST' }],
 		}),
-		getByIdGood: builder.query<T.TGoods[], number>({
+		getByIdGood: builder.query<T.TGoods, number>({
 			query: (ID) => ({
 				url: `ads/${ID}`,
 				method: 'GET',
@@ -54,7 +54,7 @@ export const goodsApi = createApi({
 								id,
 							})),
 							{ type: 'Users', id: 'LIST' },
-					  ]
+]
 					: [{ type: 'Users', id: 'LIST' }],
 		}),
 		setRegisterUser: builder.mutation<
