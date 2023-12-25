@@ -29,7 +29,7 @@ export const YourSellerInfo: FC = () => {
 							) : (
 								<NothingImage />
 							)}
-							<p>Заменить</p>
+							<p style={{color: '#009ee4'}}>Заменить</p>
 						</S.SubBoxAvatar>
 						<S.SubBoxInfo>
 							<div>

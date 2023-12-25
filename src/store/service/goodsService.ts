@@ -145,7 +145,7 @@ export const goodsApi = createApi({
 			query: ({body,id,accessToken}) => ({
 				url: `/ads/${id}/comments`,
 				method: 'POST',
-				body:body,
+				body:  body,
 				headers: {
 					'content-type': 'application/json',
 					Authorization: `Bearer ${accessToken}`,

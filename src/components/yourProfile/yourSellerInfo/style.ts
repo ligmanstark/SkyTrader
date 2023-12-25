@@ -18,7 +18,12 @@ export const SubBox = styled.div`
 	gap: 4rem;
 	margin-top: 2rem;
 `;
-export const SubBoxAvatar = styled.div``;
+export const SubBoxAvatar = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+`;
 export const Img = styled.img`
 	border-radius: 100px;
 	max-height: 12rem;
@@ -51,6 +56,4 @@ export const Info1 = styled.div`
 	gap: 4rem;
 `;
 
-export const Info2 = styled.div`
- 
-`;
+export const Info2 = styled.div``;
