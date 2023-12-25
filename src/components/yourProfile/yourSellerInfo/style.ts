@@ -6,6 +6,11 @@ export const H1Ad = styled.h1`
 	font-size: 2.5rem;
 `;
 
+export const H4Ad = styled.h4`
+	font-size: 1rem;
+	margin-top: 1rem;
+`;
+
 export const H3Ad = styled.h3`
 	font-size: 1rem;
 	color: #5f5f5f;

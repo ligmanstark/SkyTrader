@@ -22,6 +22,7 @@ export const YourSellerInfo: FC = () => {
 			{name && name ? (
 				<S.Box>
 					<S.H1Ad>{`Привет! ${name}`}</S.H1Ad>
+					<S.H4Ad>Настройки профиля</S.H4Ad>
 					<S.SubBox>
 						<S.SubBoxAvatar>
 							{avatar ? (
@@ -29,7 +30,7 @@ export const YourSellerInfo: FC = () => {
 							) : (
 								<NothingImage />
 							)}
-							<p style={{color: '#009ee4'}}>Заменить</p>
+							<p style={{ color: '#009ee4' }}>Заменить</p>
 						</S.SubBoxAvatar>
 						<S.SubBoxInfo>
 							<div>
@@ -40,6 +41,7 @@ export const YourSellerInfo: FC = () => {
 											<InputPlaceBlack
 												type="text"
 												placeholder={name}
+												required
 											/>
 										</div>
 										<div>
