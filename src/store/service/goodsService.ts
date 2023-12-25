@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import * as T from './types/index';
 import { BASE_URL } from '../../utils/consts';
  
+ 
 export const goodsApi = createApi({
 	reducerPath: 'goodsApi',
 	tagTypes: ['Users', 'Goods'],

@@ -6,8 +6,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../store/store';
 import { Button, NoButton } from '../../form/Button';
 import { NothingImage } from '../../../assets/img/index';
-import { InputPlaceBlack } from '../../form/Input';
+import {  InputPlaceBlack } from '../../form/Input';
 import { InputField } from '../../form/InputField';
+import { ModalControl } from '../../modals/ModalControl';
+import { ModalUploadAvatar } from '../../modals/uploadAvatar/ModalUploadAvatar';
 import {
 	useUpdateUserMutation,
 	useSetRefreshTokenMutation,
@@ -99,7 +101,10 @@ export const YourSellerInfo: FC = () => {
 						) : (
 							<NothingImage />
 						)}
+						<ModalControl id='uploadAvatar' modal={<ModalUploadAvatar/>}>
 						<p style={{ color: '#009ee4' }}>Заменить</p>
+
+						</ModalControl>
 					</S.SubBoxAvatar>
 					<S.SubBoxInfo>
 						<div>
