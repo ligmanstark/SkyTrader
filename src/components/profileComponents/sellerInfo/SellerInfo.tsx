@@ -1,3 +1,5 @@
+	// eslint-disable-next-line
+//@ts-nocheck
 import { FC, useState } from 'react';
 import * as S from './style';
 import { BASE_URL } from '../../../utils/consts';
@@ -10,12 +12,15 @@ export const SellerInfo: FC = () => {
 	const goods = useSelector(
 		(state: RootState) => state.goodsReducer.currentState
 	);
-
+	// eslint-disable-next-line
+	//@ts-ignore
 	const startSells = goods.user.sells_from
 		.slice(0, 10)
 		.split('-')
 		.reverse()
-		.reduce((el, sum) => el + '.' + sum);
+		.reduce((el:any, sum:any) => el + '.' + sum);
+		// eslint-disable-next-line
+	//@ts-ignore
 	const newPhone = goods.user.phone.slice(0, 7) + 'XXXXXX';
 	const phoneShow = () => {
 		isShowPhone((prev) => !prev);

@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
-
+ 
 export const Wrapper = styled.div`
 	cursor: pointer;
 	outline: none;

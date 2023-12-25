@@ -20,6 +20,7 @@ export const Search = ({ hasError, onSubmit }: TSearch) => {
 		setSearch(e.target.value);
 	};
 
+	
 	const handleSubmit = (event: React.FormEvent) => {
 		event.preventDefault();
 		const text = searchRef.current?.value || '';
