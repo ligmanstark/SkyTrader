@@ -1,15 +1,21 @@
-import { FC, useState } from 'react';
+import { FC, useState, useRef } from 'react';
 import * as S from './style';
 import { BASE_URL } from '../../../utils/consts';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../store/store';
 import { Button } from '../../form/Button';
 import { NothingImage } from '../../../assets/img/index';
 import { Input, InputPlaceBlack } from '../../form/Input';
 import { InputField } from '../../form/InputField';
-
+import { useUpdateUserMutation } from '../../../store/service/goodsService';
+import { setUser } from '../../../store/slices/userSlice';
 export const YourSellerInfo: FC = () => {
+	const dispatch = useDispatch()
+	const [updateDateUSer] = useUpdateUserMutation();
 	const [showPhone, isShowPhone] = useState(false);
+	const token = useSelector(
+		(state: RootState) => state.userReducer.access_token
+	);
 	const name = useSelector((state: RootState) => state.userReducer.name);
 	const email = useSelector((state: RootState) => state.userReducer.email);
 	const city = useSelector((state: RootState) => state.userReducer.city);
@@ -17,6 +23,36 @@ export const YourSellerInfo: FC = () => {
 	const surname = useSelector((state: RootState) => state.userReducer.surname);
 	const avatar = useSelector((state: RootState) => state.userReducer.avatar);
 
+	const nameContoll = useRef<HTMLInputElement | null>(null);
+	const surnameContoll = useRef<HTMLInputElement | null>(null);
+	const cityControll = useRef<HTMLInputElement | null>(null);
+	const phoneControll = useRef<HTMLInputElement | null>(null);
+
+	const handleUpdate = () => {
+		updateDateUSer({
+			body: {
+				city: cityControll.current?.value,
+				name: nameContoll.current?.value,
+				surname: surnameContoll.current?.value,
+				phone: phoneControll.current?.value,
+			},
+			accessToken: token as string,
+		})
+			.unwrap()
+			.then((user) => {
+				console.log(user);
+				dispatch(
+					setUser({
+						email: user.email,
+						name: user.name,
+						surname: user.surname,
+						city: user.city,
+						phone: user.phone,
+						id: user.id,
+					})
+				);
+			});
+	};
 	return (
 		<S.Wrapper>
 			{name && name ? (
@@ -42,6 +78,7 @@ export const YourSellerInfo: FC = () => {
 												type="text"
 												placeholder={name}
 												required
+												ref={nameContoll}
 											/>
 										</div>
 										<div>
@@ -49,6 +86,7 @@ export const YourSellerInfo: FC = () => {
 											<InputPlaceBlack
 												type="text"
 												placeholder={surname}
+												ref={surnameContoll}
 											></InputPlaceBlack>
 										</div>
 									</S.Info1>
@@ -58,6 +96,7 @@ export const YourSellerInfo: FC = () => {
 											<InputPlaceBlack
 												type="text"
 												placeholder={city}
+												ref={cityControll}
 											></InputPlaceBlack>
 										</div>
 										<div>
@@ -65,6 +104,7 @@ export const YourSellerInfo: FC = () => {
 											<InputPlaceBlack
 												type="number"
 												placeholder={phone}
+												ref={phoneControll}
 											></InputPlaceBlack>
 										</div>
 									</S.Info2>
@@ -73,6 +113,7 @@ export const YourSellerInfo: FC = () => {
 										style={{ marginTop: '1rem' }}
 										$border
 										type="submit"
+										onClick={handleUpdate}
 									>
 										Сохранить
 									</Button>

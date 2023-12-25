@@ -153,7 +153,8 @@ export const goodsApi = createApi({
 				}
 
 			})
-		})
+		}),
+
 	}),
 });
 

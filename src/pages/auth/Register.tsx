@@ -37,7 +37,7 @@ export const Register: FC = () => {
 			},
 		})
 			.unwrap()
-			.then(async (response: T.TUser) => {
+			.then(async (response) => {
 				dispatch(
 					setUser({
 						email: response.email,
@@ -45,23 +45,23 @@ export const Register: FC = () => {
 						name: response.name,
 					})
 				);
-				// await postToken({
-				// 	body: {
-				// 		email: data.email,
-				// 		password: data.password,
-				// 	},
-				// })
-				// 	.unwrap()
-				// 	.then((token) => {
-				// 		dispatch(
-				// 			setAccessToken({
-				// 				access_token: token.access_token,
-				// 				refresh_token: token.refresh_token,
-				// 				token_type: token.token_type,
-				// 			})
-				// 		);
-				// 	})
-				// 	.catch((err) => alert(err));
+				await postToken({
+					body: {
+						email: data.email,
+						password: data.password,
+					},
+				})
+					.unwrap()
+					.then((token) => {
+						dispatch(
+							setAccessToken({
+								access_token: token.access_token,
+								refresh_token: token.refresh_token,
+								token_type: token.token_type,
+							})
+						);
+					})
+					.catch((err) => alert(err));
 			});
 		setTimeout(() => {
 			navigate(LOGIN_ROUTE);
