@@ -2,6 +2,7 @@ import { FC } from 'react';
 import * as T from './types/index';
 import { BASE_URL } from '../../utils/consts';
 import * as S from './style';
+import { Link } from 'react-router-dom';
 
 export const GoodsItem: FC<T.TGoods> = (props) => {
 	const { title, description, id, images, price, user, created_on } = props;
@@ -13,23 +14,33 @@ export const GoodsItem: FC<T.TGoods> = (props) => {
 		.reduce((el, sum) => el + '.' + sum);
 
 	return (
-		<div>
-			<div>
-				{images[0] && images[0].url ? (
-					<S.Image src={`${BASE_URL}/${images[0].url}`} />
-				) : (
-					<S.Image src="src/assets/img/withoutImg.jpeg" />
-				)}
-			</div>
-			<S.CardInfo>
-				<S.Title>{title}</S.Title>
-				<S.Description>{description ? description : 'Описание отсутствует'}</S.Description>
-				<div>{`${price}₽`}</div>
-				<S.UserInfo>
-					<div>{`${user.name} из ${user.city}`}</div>
-					<div>{`Создано: ${newDate}`}</div>
-				</S.UserInfo>
-			</S.CardInfo>
-		</div>
+		<Link
+			to={`/goods/${id}`}
+			className="btn"
+			style={{
+				textDecoration: 'none',
+			}}
+		>
+			<S.Wrapper key={id}>
+				<div>
+					{images[0] && images[0].url ? (
+						<S.Image src={`${BASE_URL}/${images[0].url}`} />
+					) : (
+						<S.Image src="src/assets/img/withoutImg.jpeg" />
+					)}
+				</div>
+				<S.CardInfo>
+					<S.Title>{title}</S.Title>
+					<S.Description>
+						{description ? description : 'Описание отсутствует'}
+					</S.Description>
+					<div>{`${price}₽`}</div>
+					<S.UserInfo>
+						<div>{`${user.name} из ${user.city}`}</div>
+						<div>{`Создано: ${newDate}`}</div>
+					</S.UserInfo>
+				</S.CardInfo>
+			</S.Wrapper>
+		</Link>
 	);
 };

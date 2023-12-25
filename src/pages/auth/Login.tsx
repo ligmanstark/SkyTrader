@@ -8,8 +8,16 @@ import * as S from './style';
 import { LogoPic } from '../../assets/img/index';
 import { MAIN_ROUTE } from '../../utils/consts';
 import * as T from './types/index';
-
+import { useDispatch } from 'react-redux';
+import { setUser, setAccessToken } from '../../store/slices/userSlice';
+import {
+	useSetLoginUserMutation,
+	useLazyGetUserQuery,
+} from '../../store/service/goodsService';
 export const Login: FC = () => {
+	const [postToken] = useSetLoginUserMutation();
+	const [postLogin] = useLazyGetUserQuery();
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
 	const {
@@ -18,7 +26,33 @@ export const Login: FC = () => {
 		formState: { errors },
 	} = useForm<T.TSignUp>();
 
-	const onSubmit = (data: T.TSignUp) => {
+	const onSubmit = async (data: T.TSignUp) => {
+		await postToken({
+			body: {
+				email: data.email,
+				password: data.password,
+			},
+		})
+			.unwrap()
+			.then((token: any) => {
+				dispatch(
+					setAccessToken({
+						access_token: token.access_token,
+						refresh_token: token.refresh_token,
+						token_type: token.token_type,
+					})
+				);
+				postLogin({ accessToken: token.access_token })
+					.unwrap()
+					.then((login) => {
+						dispatch(
+							setUser({
+								email: login.email,
+								name: login.name,
+							})
+						);
+					});
+			});
 		setTimeout(() => {
 			navigate(MAIN_ROUTE);
 		}, 1500);

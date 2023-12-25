@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import { FC } from 'react';
 import { Container } from '../../../styled/components';
-import { Button } from '../../../components/form/Button';
 import { useLocation } from 'react-router-dom';
 import { BackUp } from '../../../assets/img/index';
 export const Footer: FC = () => {
@@ -19,10 +18,10 @@ export const Footer: FC = () => {
 			{pathname === '/register' || pathname === '/login' ? (
 				''
 			) : (
-				<Wrapper>
+				<Wrapper style={{ marginTop: '1rem' }}>
 					<Container>
-							<button onClick={scrollPageUp}>
-								<BackUp/>
+						<button onClick={scrollPageUp}>
+							<BackUp />
 						</button>
 					</Container>
 				</Wrapper>

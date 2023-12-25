@@ -4,6 +4,7 @@ import {
 } from '@reduxjs/toolkit';
 import { goodsApi } from './service/goodsService';
 import goodsReducer from './slices/goodsSlice';
+import userReducer from './slices/userSlice';
 
 // const rootReducer = combineReducers({
 // 	[goodsApi.reducerPath]:goodsApi.reducer,
@@ -23,6 +24,7 @@ export const store = configureStore({
 	reducer: {
 		[goodsApi.reducerPath]: goodsApi.reducer,
 		goodsReducer: goodsReducer,
+		userReducer: userReducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware().concat(goodsApi.middleware),
