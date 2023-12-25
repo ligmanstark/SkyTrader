@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import * as T from './types/index';
 import { BASE_URL } from '../../utils/consts';
  
+ 
 export const goodsApi = createApi({
 	reducerPath: 'goodsApi',
 	tagTypes: ['Users', 'Goods'],
@@ -130,6 +131,31 @@ export const goodsApi = createApi({
 				},
 			}),
 		}),
+		getAllComments: builder.query<T.TComments[] | null,{id:number,accessToken:string}>({
+			query: ({id,accessToken}) => ({
+				url: `/ads/${id}/comments`,
+				method: 'GET',
+				headers: {
+					'content-type': 'application/json',
+					Authorization: `Bearer ${accessToken}`,
+
+				}
+			})
+		}),
+		postComment: builder.mutation<T.TComments, { body: string; id:number,accessToken:string}>({
+			query: ({body,id,accessToken}) => ({
+				url: `/ads/${id}/comments`,
+				method: 'POST',
+				body:  body,
+				headers: {
+					'content-type': 'application/json',
+					Authorization: `Bearer ${accessToken}`,
+
+				}
+
+			})
+		}),
+
 	}),
 });
 
@@ -146,5 +172,7 @@ export const {
 	useUpdateUserAvatarMutation,
 	useLazyGetByIdGoodQuery,
 	useGetUserQuery,
-	useLazyGetUserQuery
+	useLazyGetUserQuery,
+	useLazyGetAllCommentsQuery,
+	usePostCommentMutation,
 } = goodsApi;

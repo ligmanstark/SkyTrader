@@ -564,3 +564,36 @@ export const BackUp: FC = () => (
 		/>
 	</svg>
 );
+
+export const Close: FC = () => (
+	<svg
+		width="43"
+		height="43"
+		viewBox="0 0 43 43"
+		fill="none"
+		xmlns="http://www.w3.org/2000/svg"
+	>
+		<path
+			d="M31.82 10.6066L10.6068 31.8198"
+			stroke="#D9D9D9"
+			stroke-width="2"
+		/>
+		<path
+			d="M31.82 31.8198L10.6068 10.6066"
+			stroke="#D9D9D9"
+			stroke-width="2"
+		/>
+	</svg>
+);
+
+export const NothingImage: FC = () => (
+	<svg
+		width="170"
+		height="170"
+		viewBox="0 0 170 170"
+		fill="none"
+		xmlns="http://www.w3.org/2000/svg"
+	>
+		<circle cx="85" cy="85" r="85" fill="#F0F0F0" />
+	</svg>
+);

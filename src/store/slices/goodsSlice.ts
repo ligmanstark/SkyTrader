@@ -6,6 +6,7 @@ const initialState: T.TGoodsState = {
 	searchData: [],
 	searchRef: '',
 	currentState: [],
+	idCurrentState: 0,
 };
 
 const goodsSlice = createSlice({
@@ -29,9 +30,17 @@ const goodsSlice = createSlice({
 		setCurrentStateDate(state, action) {
 			state.currentState = action.payload;
 		},
+		setCurrentIDStateDate(state, action) {
+			state.idCurrentState = action.payload;
+		},
 	},
 });
-export const { setGoods, setSearchRef, setSearchGood, setCurrentStateDate } =
-	goodsSlice.actions;
+export const {
+	setGoods,
+	setSearchRef,
+	setSearchGood,
+	setCurrentStateDate,
+	setCurrentIDStateDate,
+} = goodsSlice.actions;
 
 export default goodsSlice.reducer;

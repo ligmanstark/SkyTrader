@@ -26,3 +26,9 @@ export const Input = styled.input`
 		}
 	}
 `;
+export const InputPlaceBlack = styled(Input)`
+&::placeholder {
+		color: black;
+		transition: color 0.3s;
+	}
+`

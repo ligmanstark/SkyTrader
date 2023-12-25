@@ -7,7 +7,10 @@ import { useParams } from 'react-router-dom';
 import { useLazyGetByIdGoodQuery } from '../../store/service/goodsService';
 import { TGoods } from '../../store/service/types/TGoods';
 import { useDispatch } from 'react-redux';
-import { setCurrentStateDate } from '../../store/slices/goodsSlice';
+import {
+	setCurrentStateDate,
+	setCurrentIDStateDate,
+} from '../../store/slices/goodsSlice';
 export const CardComponents: FC = () => {
 	const dispatch = useDispatch();
 	const [currentState, setCurrentState] = useState<TGoods>();
@@ -21,6 +24,7 @@ export const CardComponents: FC = () => {
 			.then((data) => {
 				setCurrentState(data);
 				dispatch(setCurrentStateDate(data));
+				dispatch(setCurrentIDStateDate(data.id));
 			})
 			.catch((err) => alert(err));
 	}, [id]);

@@ -1,11 +1,14 @@
 {
 	"name": "sky-trader",
+	"homepage": "https://ligmanstark.github.io/sky-trader/",
 	"private": true,
 	"version": "0.1.0",
 	"type": "module",
 	"scripts": {
 		"dev": "vite --port 3000",
 		"build": "react-scripts build",
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d build",
 		"lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
 		"preview": "vite preview",
 		"postbuild": "react-snap",
@@ -17,6 +20,7 @@
 		"@reduxjs/toolkit": "^2.0.1",
 		"@types/react-image-gallery": "^1.2.4",
 		"emotion-reset": "^3.0.1",
+		"gh-pages": "^6.1.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-helmet": "^6.1.0",

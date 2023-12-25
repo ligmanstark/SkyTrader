@@ -3,12 +3,13 @@ import { InputField } from '../../components/form/InputField';
 import { Input } from '../../components/form/Input';
 import { Button } from '../../components/form/Button';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as S from './style';
 import { LogoPic } from '../../assets/img/index';
 import { MAIN_ROUTE } from '../../utils/consts';
 import * as T from './types/index';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 import { setUser, setAccessToken } from '../../store/slices/userSlice';
 import {
 	useSetLoginUserMutation,
@@ -19,7 +20,9 @@ export const Login: FC = () => {
 	const [postLogin] = useLazyGetUserQuery();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-
+	const getToken = useSelector(
+		(state: RootState) => state.userReducer.access_token
+	);
 	const {
 		register,
 		handleSubmit,
@@ -42,6 +45,7 @@ export const Login: FC = () => {
 						token_type: token.token_type,
 					})
 				);
+
 				postLogin({ accessToken: token.access_token })
 					.unwrap()
 					.then((login) => {
@@ -49,12 +53,21 @@ export const Login: FC = () => {
 							setUser({
 								email: login.email,
 								name: login.name,
+								surname: login.surname,
+								city: login.city,
+								phone: login.phone,
+								id: login.id,
 							})
 						);
 					});
 			});
 		setTimeout(() => {
-			navigate(MAIN_ROUTE);
+			localStorage.setItem('token', getToken as string);
+
+			navigate(
+				MAIN_ROUTE
+				// { replace: true }
+			);
 		}, 1500);
 	};
 
@@ -102,6 +115,9 @@ export const Login: FC = () => {
 					<Button type="submit" $color>
 						Войти
 					</Button>
+					<Link to={'/register'}>
+						<Button type="submit">Регистрация</Button>
+					</Link>
 				</S.Buttons>
 			</S.Form>
 		</S.Wrapper>
