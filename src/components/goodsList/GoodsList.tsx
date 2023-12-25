@@ -9,9 +9,7 @@ export const GoodsList: FC = () => {
 	const searchData = useSelector(
 		(state: RootState) => state.goodsReducer.searchData
 	);
-	const searchRef = useSelector(
-		(state: RootState) => state.goodsReducer.searchRef
-	);
+ 
 	return (
 		<S.GoodsBox>
 			{searchData && searchData.length < 1 ? (

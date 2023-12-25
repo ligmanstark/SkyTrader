@@ -1,4 +1,4 @@
-import { FC, useRef, MutableRefObject, FormEvent } from 'react';
+import { FC, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import * as S from './style';
 import { InputField } from '../../form/InputField';
@@ -9,7 +9,7 @@ import { useModal } from '../../../hooks/useModal';
 import { useUpdateUserAvatarMutation,useSetRefreshTokenMutation } from '../../../store/service/goodsService';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
-import { setUser,setAccessToken } from '../../../store/slices/userSlice';
+import { setAccessToken } from '../../../store/slices/userSlice';
 export const ModalUploadAvatar: FC = () => {
 	const avatarRef = useRef<HTMLInputElement | null>(null);
 	const dispatch = useDispatch();

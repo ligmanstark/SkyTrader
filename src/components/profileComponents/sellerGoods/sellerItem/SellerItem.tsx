@@ -5,7 +5,7 @@ import * as S from './style';
 import { Link } from 'react-router-dom';
 
 export const SellerItem: FC<T.TGoods> = (props) => {
-	const { title, description, id, images, price, user, created_on } = props;
+	const { title, id, images, price, user, created_on } = props;
 	console.log(images[0]);
 	const newDate = created_on
 		.slice(0, 10)
