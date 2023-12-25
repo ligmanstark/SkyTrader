@@ -1,18 +1,22 @@
-import { FC, useState, useRef } from 'react';
+import { FC, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import * as S from './style';
 import { BASE_URL } from '../../../utils/consts';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../store/store';
-import { Button } from '../../form/Button';
+import { Button, NoButton } from '../../form/Button';
 import { NothingImage } from '../../../assets/img/index';
 import { Input, InputPlaceBlack } from '../../form/Input';
 import { InputField } from '../../form/InputField';
-import { useUpdateUserMutation } from '../../../store/service/goodsService';
-import { setUser } from '../../../store/slices/userSlice';
+import {
+	useUpdateUserMutation,
+	useSetRefreshTokenMutation,
+} from '../../../store/service/goodsService';
+import { setUser,setAccessToken } from '../../../store/slices/userSlice';
 export const YourSellerInfo: FC = () => {
-	const dispatch = useDispatch()
+	const dispatch = useDispatch();
 	const [updateDateUSer] = useUpdateUserMutation();
-	const [showPhone, isShowPhone] = useState(false);
+	const [putRefreshToken] = useSetRefreshTokenMutation();
 	const token = useSelector(
 		(state: RootState) => state.userReducer.access_token
 	);
@@ -23,39 +27,70 @@ export const YourSellerInfo: FC = () => {
 	const surname = useSelector((state: RootState) => state.userReducer.surname);
 	const avatar = useSelector((state: RootState) => state.userReducer.avatar);
 
+	const accessToken = useSelector(
+		(state: RootState) => state.userReducer.access_token
+	);
+	const refreshToken = useSelector(
+		(state: RootState) => state.userReducer.refresh_token
+	);
+
 	const nameContoll = useRef<HTMLInputElement | null>(null);
 	const surnameContoll = useRef<HTMLInputElement | null>(null);
 	const cityControll = useRef<HTMLInputElement | null>(null);
 	const phoneControll = useRef<HTMLInputElement | null>(null);
 
 	const handleUpdate = () => {
-		updateDateUSer({
-			body: {
-				city: cityControll.current?.value,
-				name: nameContoll.current?.value,
-				surname: surnameContoll.current?.value,
-				phone: phoneControll.current?.value,
-			},
-			accessToken: token as string,
-		})
-			.unwrap()
-			.then((user) => {
-				console.log(user);
-				dispatch(
-					setUser({
-						email: user.email,
-						name: user.name,
-						surname: user.surname,
-						city: user.city,
-						phone: user.phone,
-						id: user.id,
-					})
-				);
-			});
+		if (
+			nameContoll.current?.value.length ||
+			surnameContoll.current?.value.length ||
+			cityControll.current?.value.length ||
+			phoneControll.current?.value.length
+		) {
+			updateDateUSer({
+				body: {
+					city: cityControll.current?.value,
+					name: nameContoll.current?.value,
+					surname: surnameContoll.current?.value,
+					phone: phoneControll.current?.value,
+				},
+				accessToken: token as string,
+			})
+				.unwrap()
+				.then((user) => {
+					console.log(user);
+					dispatch(
+						setUser({
+							email: user.email,
+							name: user.name,
+							surname: user.surname,
+							city: user.city,
+							phone: user.phone,
+							id: user.id,
+						})
+					);
+				})
+				.catch((error) => {
+					if (error.status === 401) {
+						putRefreshToken({
+							access_token: accessToken as string,
+							refresh_token: refreshToken as string,
+						})
+							.unwrap()
+							.then((newToken) => {
+								console.log('token upload');
+								dispatch(setAccessToken(newToken));
+								localStorage.setItem('token', newToken.access_token);
+							})
+							.catch(() => {
+								<Link to="/login"></Link>;
+							});
+					}
+				});
+		}
 	};
 	return (
 		<S.Wrapper>
-			{name && name ? (
+
 				<S.Box>
 					<S.H1Ad>{`Привет! ${name}`}</S.H1Ad>
 					<S.H4Ad>Настройки профиля</S.H4Ad>
@@ -79,7 +114,7 @@ export const YourSellerInfo: FC = () => {
 												placeholder={name}
 												required
 												ref={nameContoll}
-											/>
+											></InputPlaceBlack>
 										</div>
 										<div>
 											<S.SellerName>Фамилия</S.SellerName>
@@ -108,23 +143,42 @@ export const YourSellerInfo: FC = () => {
 											></InputPlaceBlack>
 										</div>
 									</S.Info2>
-
-									<Button
+									{nameContoll.current?.value ||
+									surnameContoll.current?.value ||
+									cityControll.current?.value ||
+									phoneControll.current?.value ? (
+										<Button
+											style={{ marginTop: '1rem' }}
+											$border
+											type="submit"
+											onClick={handleUpdate}
+										>
+											Сохранить
+										</Button>
+									) : (
+										<NoButton
+											style={{ marginTop: '1rem' }}
+											$border
+											type="submit"
+											onClick={handleUpdate}
+										>
+											Сохранить
+										</NoButton>
+									)}
+									{/* <Button
 										style={{ marginTop: '1rem' }}
 										$border
 										type="submit"
 										onClick={handleUpdate}
 									>
 										Сохранить
-									</Button>
+									</Button> */}
 								</InputField>
 							</div>
 						</S.SubBoxInfo>
 					</S.SubBox>
 				</S.Box>
-			) : (
-				''
-			)}
+			
 		</S.Wrapper>
 	);
 };
