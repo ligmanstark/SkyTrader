@@ -3,13 +3,22 @@ import { InputField } from '../../components/form/InputField';
 import { Input } from '../../components/form/Input';
 import { Button } from '../../components/form/Button';
 import { useForm } from 'react-hook-form';
-import {  useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import * as S from './style';
 import { LogoPic } from '../../assets/img/index';
 import { LOGIN_ROUTE } from '../../utils/consts';
 import * as T from './types/index';
+import {
+	useSetRegisterUserMutation,
+	useSetLoginUserMutation,
+} from '../../store/service/goodsService';
+import { useDispatch } from 'react-redux';
+import { setUser, setAccessToken } from '../../store/slices/userSlice';
 
 export const Register: FC = () => {
+	const dispatch = useDispatch();
+	const [postReg] = useSetRegisterUserMutation();
+	const [postToken] = useSetLoginUserMutation();
 	const navigate = useNavigate();
 
 	const {
@@ -19,7 +28,41 @@ export const Register: FC = () => {
 		getValues,
 	} = useForm<T.TSignUp>();
 
-	const onSubmit = (data: T.TSignUp) => {
+	const onSubmit = async (data: T.TSignUp) => {
+		await postReg({
+			body: {
+				email: data.email,
+				password: data.password,
+				name: data.name,
+			},
+		})
+			.unwrap()
+			.then(async (response) => {
+				dispatch(
+					setUser({
+						email: response.email,
+						password: response.password,
+						name: response.name,
+					})
+				);
+				await postToken({
+					body: {
+						email: data.email,
+						password: data.password,
+					},
+				})
+					.unwrap()
+					.then((token) => {
+						dispatch(
+							setAccessToken({
+								access_token: token.access_token,
+								refresh_token: token.refresh_token,
+								token_type: token.token_type,
+							})
+						);
+					})
+					.catch((err) => alert(err));
+			});
 		setTimeout(() => {
 			navigate(LOGIN_ROUTE);
 		}, 1500);
@@ -77,7 +120,16 @@ export const Register: FC = () => {
 					/>
 				</InputField>
 				<InputField error={errors.name?.message}>
-					<Input {...register('name')} placeholder="Name" />
+					<Input
+						{...register('name', {
+							required: 'Заполните данное поле',
+							pattern: {
+								value: /^[A-Z0-9._%+-]+$/i,
+								message: 'Некорректный ник',
+							},
+						})}
+						placeholder="Name"
+					/>
 				</InputField>
 				<InputField error={errors.surname?.message}>
 					<Input {...register('surname')} placeholder="Surname" />

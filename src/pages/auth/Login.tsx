@@ -3,24 +3,71 @@ import { InputField } from '../../components/form/InputField';
 import { Input } from '../../components/form/Input';
 import { Button } from '../../components/form/Button';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as S from './style';
 import { LogoPic } from '../../assets/img/index';
 import { MAIN_ROUTE } from '../../utils/consts';
 import * as T from './types/index';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+import { setUser, setAccessToken } from '../../store/slices/userSlice';
+import {
+	useSetLoginUserMutation,
+	useLazyGetUserQuery,
+} from '../../store/service/goodsService';
 export const Login: FC = () => {
+	const [postToken] = useSetLoginUserMutation();
+	const [postLogin] = useLazyGetUserQuery();
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
-
+	const getToken = useSelector(
+		(state: RootState) => state.userReducer.access_token
+	);
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm<T.TSignUp>();
 
-	const onSubmit = (data: T.TSignUp) => {
+	const onSubmit = async (data: T.TSignUp) => {
+		await postToken({
+			body: {
+				email: data.email,
+				password: data.password,
+			},
+		})
+			.unwrap()
+			.then((token: any) => {
+				dispatch(
+					setAccessToken({
+						access_token: token.access_token,
+						refresh_token: token.refresh_token,
+						token_type: token.token_type,
+					})
+				);
+
+				postLogin({ accessToken: token.access_token })
+					.unwrap()
+					.then((login) => {
+						dispatch(
+							setUser({
+								email: login.email,
+								name: login.name,
+								surname: login.surname,
+								city: login.city,
+								phone: login.phone,
+								id: login.id,
+							})
+						);
+					});
+			});
 		setTimeout(() => {
-			navigate(MAIN_ROUTE);
+			localStorage.setItem('token', getToken as string);
+
+			navigate(
+				MAIN_ROUTE
+				// { replace: true }
+			);
 		}, 1500);
 	};
 
@@ -68,6 +115,9 @@ export const Login: FC = () => {
 					<Button type="submit" $color>
 						Войти
 					</Button>
+					<Link to={'/register'}>
+						<Button type="submit">Регистрация</Button>
+					</Link>
 				</S.Buttons>
 			</S.Form>
 		</S.Wrapper>

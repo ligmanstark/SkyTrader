@@ -2,8 +2,7 @@ import { useRef } from 'react';
 import { Button } from '../Button';
 import { InputField } from '../InputField';
 import { Input } from '../Input';
-import * as S from './style';
-
+ 
 type TSearch = {
 	hasError?: boolean;
 	onSubmit: (text: string) => void;
@@ -39,11 +38,13 @@ export const Search = ({ hasError, onSubmit }: TSearch) => {
 					placeholder="    Поиск по объявлениям"
 					style={{
 						width: '80%',
-						padding:'0'
+						padding: '0',
 					}}
 				/>
-				{hasError && <S.Error>Отсутствуют результаты</S.Error>}
-				<Button $color onClick={handleSubmit}>Найти</Button>
+				{hasError && <div>Отсутствуют результаты</div>}
+				<Button $color onClick={handleSubmit}>
+					Найти
+				</Button>
 			</div>
 		</InputField>
 	);

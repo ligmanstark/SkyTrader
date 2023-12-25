@@ -3,7 +3,11 @@ import {
 	// combineReducers
 } from '@reduxjs/toolkit';
 import { goodsApi } from './service/goodsService';
- 
+import goodsReducer from './slices/goodsSlice';
+import userReducer from './slices/userSlice';
+import modalReducer from './slices/modalSlice';
+import commentsReducer from './slices/commentsSlice';
+
 // const rootReducer = combineReducers({
 // 	[goodsApi.reducerPath]:goodsApi.reducer,
 // })
@@ -21,10 +25,13 @@ import { goodsApi } from './service/goodsService';
 export const store = configureStore({
 	reducer: {
 		[goodsApi.reducerPath]: goodsApi.reducer,
-		
+		goodsReducer: goodsReducer,
+		userReducer: userReducer,
+		modalReducer: modalReducer,
+		commentsReducer: commentsReducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware().concat(goodsApi.middleware),
 });
 
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof store.getState>;
