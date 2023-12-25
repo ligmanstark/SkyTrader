@@ -25,9 +25,12 @@ export const publicRoutes: RouteType[] = [
 	{ path: ABOUT_ROUTE, component: <About /> },
 	{ path: REGISTER_ROUTE, component: <Register /> },
 	{ path: LOGIN_ROUTE, component: <Login /> },
-	{ path: `${GOODS}/:id`, component: <GoodsCard /> },
-	{ path: `${PROFILE_ROUTE}/:id`, component: <SellerCard /> },
 
 	//...
 	{ path: NOT_FOUND_ROUTE, component: <NotFound /> },
+];
+
+export const privateRoutes: RouteType[] = [
+	{ path: `${GOODS}/:id`, component: <GoodsCard /> },
+	{ path: `${PROFILE_ROUTE}/:id`, component: <SellerCard /> },
 ];

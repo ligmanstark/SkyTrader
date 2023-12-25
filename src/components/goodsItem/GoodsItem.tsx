@@ -20,6 +20,7 @@ export const GoodsItem: FC<T.TGoods> = (props) => {
 			style={{
 				textDecoration: 'none',
 			}}
+			// replace={true}
 		>
 			<S.Wrapper key={id}>
 				<div>

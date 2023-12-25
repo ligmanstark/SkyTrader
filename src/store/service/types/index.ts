@@ -11,3 +11,4 @@ export * from './users/updateUser/TUpdateUser';
 export * from './users/updateUser/TUpdateUserReq';
 export * from './users/updateUser/updatePassword/TUpdatePasswordReq';
 export * from './users/updateUser/updatePassword/TUpdatePassword';
+export * from './TComments'

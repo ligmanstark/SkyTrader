@@ -8,7 +8,8 @@ import * as S from './style';
 import { LogoPic } from '../../assets/img/index';
 import { MAIN_ROUTE } from '../../utils/consts';
 import * as T from './types/index';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 import { setUser, setAccessToken } from '../../store/slices/userSlice';
 import {
 	useSetLoginUserMutation,
@@ -19,7 +20,7 @@ export const Login: FC = () => {
 	const [postLogin] = useLazyGetUserQuery();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-
+const getToken = useSelector((state:RootState)=>state.userReducer.access_token)
 	const {
 		register,
 		handleSubmit,
@@ -42,6 +43,7 @@ export const Login: FC = () => {
 						token_type: token.token_type,
 					})
 				);
+
 				postLogin({ accessToken: token.access_token })
 					.unwrap()
 					.then((login) => {
@@ -54,8 +56,13 @@ export const Login: FC = () => {
 					});
 			});
 		setTimeout(() => {
-			navigate(MAIN_ROUTE);
+			localStorage.setItem('token', getToken as string);
+
+			navigate(MAIN_ROUTE,
+				// { replace: true }
+			);
 		}, 1500);
+		
 	};
 
 	return (

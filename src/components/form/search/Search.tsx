@@ -1,9 +1,8 @@
 import { useRef } from 'react';
-import { Button } from '../form/Button';
-import { InputField } from '../form/InputField';
-import { Input } from '../form/Input';
-import * as S from './style';
-
+import { Button } from '../Button';
+import { InputField } from '../InputField';
+import { Input } from '../Input';
+ 
 type TSearch = {
 	hasError?: boolean;
 	onSubmit: (text: string) => void;
@@ -42,7 +41,7 @@ export const Search = ({ hasError, onSubmit }: TSearch) => {
 						padding: '0',
 					}}
 				/>
-				{hasError && <S.Error>Отсутствуют результаты</S.Error>}
+				{hasError && <div>Отсутствуют результаты</div>}
 				<Button $color onClick={handleSubmit}>
 					Найти
 				</Button>

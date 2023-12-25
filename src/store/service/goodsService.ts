@@ -130,6 +130,30 @@ export const goodsApi = createApi({
 				},
 			}),
 		}),
+		getAllComments: builder.query<T.TComments[] | null,{id:number,accessToken:string}>({
+			query: ({id,accessToken}) => ({
+				url: `/ads/${id}/comments`,
+				method: 'GET',
+				headers: {
+					'content-type': 'application/json',
+					Authorization: `Bearer ${accessToken}`,
+
+				}
+			})
+		}),
+		postComment: builder.mutation<T.TComments, { string: string; id:number,accessToken:string}>({
+			query: ({string,id,accessToken}) => ({
+				url: `/ads/${id}/comments`,
+				method: 'POST',
+				string,
+				headers: {
+					'content-type': 'application/json',
+					Authorization: `Bearer ${accessToken}`,
+
+				}
+
+			})
+		})
 	}),
 });
 
@@ -146,5 +170,7 @@ export const {
 	useUpdateUserAvatarMutation,
 	useLazyGetByIdGoodQuery,
 	useGetUserQuery,
-	useLazyGetUserQuery
+	useLazyGetUserQuery,
+	useLazyGetAllCommentsQuery,
+	usePostCommentMutation,
 } = goodsApi;
