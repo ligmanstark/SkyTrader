@@ -5,6 +5,7 @@ import {
 import { goodsApi } from './service/goodsService';
 import goodsReducer from './slices/goodsSlice';
 import userReducer from './slices/userSlice';
+import modalReducer from './slices/modalSlice';
 
 // const rootReducer = combineReducers({
 // 	[goodsApi.reducerPath]:goodsApi.reducer,
@@ -25,6 +26,7 @@ export const store = configureStore({
 		[goodsApi.reducerPath]: goodsApi.reducer,
 		goodsReducer: goodsReducer,
 		userReducer: userReducer,
+		modalReducer: modalReducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware().concat(goodsApi.middleware),
