@@ -18,9 +18,9 @@ export const Button = styled.button<Props>`
 	cursor: pointer;
 	border: ${({ $border }) =>
 		$border ? '0.0625rem solid #D0CECE' : null};
-	&:hover {
-		background: ${({ $color }) => ($color ? '#0080C1' : '#009EE4')};
-	}
+	// &:hover {
+	// 	background: ${({ $color }) => ($color ? '#0080C1' : '#009EE4')};
+	// }
 	&:active {
 		background: ${({ $color }) => ($color ? '#009EE4' : '##0080C1')};
 	}

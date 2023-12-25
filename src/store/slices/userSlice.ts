@@ -8,6 +8,11 @@ const initialState: T.TUser = {
 	access_token: '',
 	refresh_token: '',
 	token_type: '',
+	avatar: '',
+	city: '',
+	phone: '',
+	surname: '',
+	id: 0,
 };
 
 const userSlice = createSlice({
@@ -18,15 +23,19 @@ const userSlice = createSlice({
 			state.email = action.payload.email;
 			state.password = action.payload.password;
 			state.name = action.payload.name;
-        },
-        setAccessToken(state, action) {
-            state.access_token = action.payload.access_token;
-            state.refresh_token = action.payload.refresh_token;
-            state.token_type = action.payload.token_type;
-
-        }
+			state.city = action.payload.city;
+			state.avatar = action.payload.avatar;
+			state.id = action.payload.id;
+			state.surname = action.payload.surname;
+			state.phone = action.payload.phone;
+		},
+		setAccessToken(state, action) {
+			state.access_token = action.payload.access_token;
+			state.refresh_token = action.payload.refresh_token;
+			state.token_type = action.payload.token_type;
+		},
 	},
 });
 
-export const { setUser,setAccessToken } = userSlice.actions;
+export const { setUser, setAccessToken } = userSlice.actions;
 export default userSlice.reducer;

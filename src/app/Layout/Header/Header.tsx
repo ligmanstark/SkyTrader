@@ -1,6 +1,6 @@
 import { FC, useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { MAIN_ROUTE } from '../../../utils/consts';
+import { MAIN_ROUTE,PROFILE_ROUTE_ME } from '../../../utils/consts';
 import { Button } from '../../../components/form/Button';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
@@ -44,9 +44,11 @@ export const Header: FC = () => {
 								<Button style={{ margin: '1rem' }} $color $border>
 									Разместить объявление
 								</Button>
-								<Button style={{ margin: '1rem' }} $color $border>
-									Личный кабинет
-								</Button>
+								<Link to={PROFILE_ROUTE_ME}>
+									<Button style={{ margin: '1rem' }} $color $border>
+										Личный кабинет
+									</Button>
+								</Link>
 							</S.ButtonBox>
 						)}
 					</S.MyContainer>

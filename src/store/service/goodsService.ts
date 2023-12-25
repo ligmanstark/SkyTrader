@@ -141,11 +141,11 @@ export const goodsApi = createApi({
 				}
 			})
 		}),
-		postComment: builder.mutation<T.TComments, { string: string; id:number,accessToken:string}>({
-			query: ({string,id,accessToken}) => ({
+		postComment: builder.mutation<T.TComments, { body: string; id:number,accessToken:string}>({
+			query: ({body,id,accessToken}) => ({
 				url: `/ads/${id}/comments`,
 				method: 'POST',
-				string,
+				body:body,
 				headers: {
 					'content-type': 'application/json',
 					Authorization: `Bearer ${accessToken}`,

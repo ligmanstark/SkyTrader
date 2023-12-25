@@ -4,6 +4,7 @@ enum Role {
 }
 
 export type TUpdateUser = {
+	id?:number
 	role?: Role;
 	email?: string;
 	name?: string;

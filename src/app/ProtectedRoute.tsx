@@ -6,7 +6,7 @@ interface IProtectedRoute {
 }
 
 export const ProtectedRoute: FC = () => {
-	if (localStorage.length < 1 && localStorage.getItem('token') === '') {
+	if (localStorage.getItem('token') === '') {
 		return <Navigate to="/login" replace={true} />;
 	}
 	return <Outlet />;

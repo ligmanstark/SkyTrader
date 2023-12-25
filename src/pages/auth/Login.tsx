@@ -20,7 +20,9 @@ export const Login: FC = () => {
 	const [postLogin] = useLazyGetUserQuery();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-const getToken = useSelector((state:RootState)=>state.userReducer.access_token)
+	const getToken = useSelector(
+		(state: RootState) => state.userReducer.access_token
+	);
 	const {
 		register,
 		handleSubmit,
@@ -51,6 +53,10 @@ const getToken = useSelector((state:RootState)=>state.userReducer.access_token)
 							setUser({
 								email: login.email,
 								name: login.name,
+								surname: login.surname,
+								city: login.city,
+								phone: login.phone,
+								id: login.id,
 							})
 						);
 					});
@@ -58,11 +64,11 @@ const getToken = useSelector((state:RootState)=>state.userReducer.access_token)
 		setTimeout(() => {
 			localStorage.setItem('token', getToken as string);
 
-			navigate(MAIN_ROUTE,
+			navigate(
+				MAIN_ROUTE
 				// { replace: true }
 			);
 		}, 1500);
-		
 	};
 
 	return (
