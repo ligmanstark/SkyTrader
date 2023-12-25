@@ -6,13 +6,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../store/store';
 import { Button, NoButton } from '../../form/Button';
 import { NothingImage } from '../../../assets/img/index';
-import { Input, InputPlaceBlack } from '../../form/Input';
+import { InputPlaceBlack } from '../../form/Input';
 import { InputField } from '../../form/InputField';
 import {
 	useUpdateUserMutation,
 	useSetRefreshTokenMutation,
 } from '../../../store/service/goodsService';
-import { setUser,setAccessToken } from '../../../store/slices/userSlice';
+import { setUser, setAccessToken } from '../../../store/slices/userSlice';
 export const YourSellerInfo: FC = () => {
 	const dispatch = useDispatch();
 	const [updateDateUSer] = useUpdateUserMutation();
@@ -21,7 +21,6 @@ export const YourSellerInfo: FC = () => {
 		(state: RootState) => state.userReducer.access_token
 	);
 	const name = useSelector((state: RootState) => state.userReducer.name);
-	const email = useSelector((state: RootState) => state.userReducer.email);
 	const city = useSelector((state: RootState) => state.userReducer.city);
 	const phone = useSelector((state: RootState) => state.userReducer.phone);
 	const surname = useSelector((state: RootState) => state.userReducer.surname);
@@ -90,82 +89,81 @@ export const YourSellerInfo: FC = () => {
 	};
 	return (
 		<S.Wrapper>
-
-				<S.Box>
-					<S.H1Ad>{`Привет! ${name}`}</S.H1Ad>
-					<S.H4Ad>Настройки профиля</S.H4Ad>
-					<S.SubBox>
-						<S.SubBoxAvatar>
-							{avatar ? (
-								<S.Img src={`${BASE_URL}/${avatar}`} />
-							) : (
-								<NothingImage />
-							)}
-							<p style={{ color: '#009ee4' }}>Заменить</p>
-						</S.SubBoxAvatar>
-						<S.SubBoxInfo>
-							<div>
-								<InputField>
-									<S.Info1>
-										<div>
-											<S.SellerName>Имя</S.SellerName>
-											<InputPlaceBlack
-												type="text"
-												placeholder={name}
-												required
-												ref={nameContoll}
-											></InputPlaceBlack>
-										</div>
-										<div>
-											<S.SellerName>Фамилия</S.SellerName>
-											<InputPlaceBlack
-												type="text"
-												placeholder={surname}
-												ref={surnameContoll}
-											></InputPlaceBlack>
-										</div>
-									</S.Info1>
-									<S.Info2>
-										<div style={{ maxWidth: '14.8rem' }}>
-											<S.SellerName>Город</S.SellerName>
-											<InputPlaceBlack
-												type="text"
-												placeholder={city}
-												ref={cityControll}
-											></InputPlaceBlack>
-										</div>
-										<div>
-											<S.SellerName>Телефон</S.SellerName>
-											<InputPlaceBlack
-												type="number"
-												placeholder={phone}
-												ref={phoneControll}
-											></InputPlaceBlack>
-										</div>
-									</S.Info2>
-									{nameContoll.current?.value ||
-									surnameContoll.current?.value ||
-									cityControll.current?.value ||
-									phoneControll.current?.value ? (
-										<Button
-											style={{ marginTop: '1rem' }}
-											$border
-											type="submit"
-											onClick={handleUpdate}
-										>
-											Сохранить
-										</Button>
-									) : (
-										<NoButton
-											style={{ marginTop: '1rem' }}
-											$border
-											type="submit"
-											onClick={handleUpdate}
-										>
-											Сохранить
-										</NoButton>
-									)}
-									{/* <Button
+			<S.Box>
+				<S.H1Ad>{`Привет! ${name}`}</S.H1Ad>
+				<S.H4Ad>Настройки профиля</S.H4Ad>
+				<S.SubBox>
+					<S.SubBoxAvatar>
+						{avatar ? (
+							<S.Img src={`${BASE_URL}/${avatar}`} />
+						) : (
+							<NothingImage />
+						)}
+						<p style={{ color: '#009ee4' }}>Заменить</p>
+					</S.SubBoxAvatar>
+					<S.SubBoxInfo>
+						<div>
+							<InputField>
+								<S.Info1>
+									<div>
+										<S.SellerName>Имя</S.SellerName>
+										<InputPlaceBlack
+											type="text"
+											placeholder={name}
+											required
+											ref={nameContoll}
+										></InputPlaceBlack>
+									</div>
+									<div>
+										<S.SellerName>Фамилия</S.SellerName>
+										<InputPlaceBlack
+											type="text"
+											placeholder={surname}
+											ref={surnameContoll}
+										></InputPlaceBlack>
+									</div>
+								</S.Info1>
+								<S.Info2>
+									<div style={{ maxWidth: '14.8rem' }}>
+										<S.SellerName>Город</S.SellerName>
+										<InputPlaceBlack
+											type="text"
+											placeholder={city}
+											ref={cityControll}
+										></InputPlaceBlack>
+									</div>
+									<div>
+										<S.SellerName>Телефон</S.SellerName>
+										<InputPlaceBlack
+											type="number"
+											placeholder={phone}
+											ref={phoneControll}
+										></InputPlaceBlack>
+									</div>
+								</S.Info2>
+								{nameContoll.current?.value ||
+								surnameContoll.current?.value ||
+								cityControll.current?.value ||
+								phoneControll.current?.value ? (
+									<Button
+										style={{ marginTop: '1rem' }}
+										$border
+										type="submit"
+										onClick={handleUpdate}
+									>
+										Сохранить
+									</Button>
+								) : (
+									<NoButton
+										style={{ marginTop: '1rem' }}
+										$border
+										type="submit"
+										onClick={handleUpdate}
+									>
+										Сохранить
+									</NoButton>
+								)}
+								{/* <Button
 										style={{ marginTop: '1rem' }}
 										$border
 										type="submit"
@@ -173,12 +171,11 @@ export const YourSellerInfo: FC = () => {
 									>
 										Сохранить
 									</Button> */}
-								</InputField>
-							</div>
-						</S.SubBoxInfo>
-					</S.SubBox>
-				</S.Box>
-			
+							</InputField>
+						</div>
+					</S.SubBoxInfo>
+				</S.SubBox>
+			</S.Box>
 		</S.Wrapper>
 	);
 };
