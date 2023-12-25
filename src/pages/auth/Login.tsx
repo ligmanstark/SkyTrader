@@ -3,7 +3,7 @@ import { InputField } from '../../components/form/InputField';
 import { Input } from '../../components/form/Input';
 import { Button } from '../../components/form/Button';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as S from './style';
 import { LogoPic } from '../../assets/img/index';
 import { MAIN_ROUTE } from '../../utils/consts';
@@ -115,6 +115,9 @@ export const Login: FC = () => {
 					<Button type="submit" $color>
 						Войти
 					</Button>
+					<Link to={'/register'}>
+						<Button type="submit">Регистрация</Button>
+					</Link>
 				</S.Buttons>
 			</S.Form>
 		</S.Wrapper>
