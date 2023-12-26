@@ -7,9 +7,9 @@
 	"scripts": {
 		"dev": "vite --port 3000",
 		"build": "react-scripts build",
-		"predeploy": "npm run build",
+		"predeploy": "yarn run build",
 		"deploy": "gh-pages -d build",
-		"lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+		"lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
 		"preview": "vite preview",
 		"postbuild": "react-snap",
 		"prebuild": "cpx \"./index.html\" \"./public\""
