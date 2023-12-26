@@ -13,7 +13,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
 import { setAccessToken } from '../../../store/slices/userSlice';
-export const ModalUploadAvatar: FC = () => {
+export const ModalUploadAvatar2: FC = () => {
 	const avatarRef = useRef<HTMLInputElement | null>(null);
 	const dispatch = useDispatch();
 	const token = useSelector(
@@ -29,19 +29,25 @@ export const ModalUploadAvatar: FC = () => {
 	const { close } = useModal('uploadAvatar');
 	const [updateAvatar] = useUpdateUserAvatarMutation();
 	const [putRefreshToken] = useSetRefreshTokenMutation();
+
+	// const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+	// 	const file = event.target.files ? event.target.files[0] : null;
+	// 	if (file) {
+	// 		const reader = new FileReader();
+
+	// 		reader.readAsDataURL(file);
+	// 		getFile(file);
+	// 		return;
+	// 	}
+	// };
 	const handleUpload = (event: any) => {
-		const files = event.target.files[0];
+		const files = event.target.files ? event.target.files[0] : null;
 		console.log(event.target.files);
-		// const formdata = new FormData();
-		// formdata.append('myAvatar', files[0]);
 
 		const reader = new FileReader();
 		reader.readAsDataURL(files);
-console.log(reader);
-		updateAvatar({
-			accessToken: token as string,
-			body: files,
-		})
+		console.log(reader);
+		updateAvatar({ credent: files, accessToken: token as string })
 			.unwrap()
 			.then((response) => {
 				console.log(response);

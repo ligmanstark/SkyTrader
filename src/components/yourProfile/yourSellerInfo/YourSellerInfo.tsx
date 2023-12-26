@@ -10,6 +10,8 @@ import { InputPlaceBlack } from '../../form/Input';
 import { InputField } from '../../form/InputField';
 import { ModalControl } from '../../modals/ModalControl';
 import { ModalUploadAvatar } from '../../modals/uploadAvatar/ModalUploadAvatar';
+import { ModalUploadAvatar2  } from '../../modals/uploadAvatar/ModalUploadAvatar2';
+
 import {
 	useUpdateUserMutation,
 	useSetRefreshTokenMutation,
@@ -129,7 +131,7 @@ export const YourSellerInfo: FC = () => {
 						) : (
 							<NothingImage />
 						)}
-						<ModalControl id="uploadAvatar" modal={<ModalUploadAvatar />}>
+						<ModalControl id="uploadAvatar" modal={<ModalUploadAvatar2 />}>
 							<p style={{ color: '#009ee4' }}>Заменить</p>
 						</ModalControl>
 					</S.SubBoxAvatar>

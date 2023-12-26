@@ -119,18 +119,35 @@ export const goodsApi = createApi({
 				},
 			}),
 		}),
-		updateUserAvatar: builder.mutation<object,{ body: FormData; accessToken: string }>({
-			query: ({ body, accessToken }) => ({
-				url: '/user/avatar',
-				method: 'POST',
-				credentials: 'include',
-				body,
-				headers: {
-					'content-type': 'application/json',
-					Authorization: `Bearer ${accessToken}`,
-				},
-			}),
+		updateUserAvatar: builder.mutation<T.TUpdateUser, { credent: File | null; accessToken:string} >({
+			query: ({credent,accessToken}) => {
+				const formData = new FormData()
+				if (credent) {
+					formData.append('file',credent)
+				}
+				return {
+					url: '/user/avatar/',
+					method: 'POST',
+					body: formData,
+					headers: {
+						'content-type': 'application/json',
+						Authorization: `Bearer ${accessToken}`,
+					},
+				}
+			}
 		}),
+		// updateUserAvatar: builder.mutation<object,{ body: FileReader; accessToken: string }>({
+		// 	query: ({ body, accessToken }) => ({
+		// 		url: '/user/avatar',
+		// 		method: 'POST',
+		// 		// credentials: 'include',
+		// 		body,
+		// 		headers: {
+		// 			'content-type': 'application/json',
+		// 			Authorization: `Bearer ${accessToken}`,
+		// 		},
+		// 	}),
+		// }),
 		getAllComments: builder.query<T.TComments[] | null,{id:number,accessToken:string}>({
 			query: ({id,accessToken}) => ({
 				url: `/ads/${id}/comments`,

@@ -1,4 +1,4 @@
-	// eslint-disable-next-line
+// eslint-disable-next-line
 //@ts-nocheck
 import { FC, useState } from 'react';
 import * as S from './style';
@@ -18,8 +18,8 @@ export const SellerInfo: FC = () => {
 		.slice(0, 10)
 		.split('-')
 		.reverse()
-		.reduce((el:any, sum:any) => el + '.' + sum);
-		// eslint-disable-next-line
+		.reduce((el: any, sum: any) => el + '.' + sum);
+	// eslint-disable-next-line
 	//@ts-ignore
 	const newPhone = goods.user.phone.slice(0, 7) + 'XXXXXX';
 	const phoneShow = () => {
