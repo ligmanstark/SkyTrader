@@ -30,16 +30,6 @@ export const ModalUploadAvatar2: FC = () => {
 	const [updateAvatar] = useUpdateUserAvatarMutation();
 	const [putRefreshToken] = useSetRefreshTokenMutation();
 
-	// const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-	// 	const file = event.target.files ? event.target.files[0] : null;
-	// 	if (file) {
-	// 		const reader = new FileReader();
-
-	// 		reader.readAsDataURL(file);
-	// 		getFile(file);
-	// 		return;
-	// 	}
-	// };
 	const handleUpload = (event: any) => {
 		const files = event.target.files ? event.target.files[0] : null;
 		console.log(event.target.files);
