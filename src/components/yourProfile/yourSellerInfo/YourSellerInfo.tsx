@@ -1,4 +1,4 @@
-import { FC, useRef } from 'react';
+import { FC, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import * as S from './style';
 import { BASE_URL } from '../../../utils/consts';
@@ -6,10 +6,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../store/store';
 import { Button, NoButton } from '../../form/Button';
 import { NothingImage } from '../../../assets/img/index';
-import {  InputPlaceBlack } from '../../form/Input';
+import { InputPlaceBlack } from '../../form/Input';
 import { InputField } from '../../form/InputField';
 import { ModalControl } from '../../modals/ModalControl';
 import { ModalUploadAvatar } from '../../modals/uploadAvatar/ModalUploadAvatar';
+import { ModalUploadAvatar2  } from '../../modals/uploadAvatar/ModalUploadAvatar2';
+
 import {
 	useUpdateUserMutation,
 	useSetRefreshTokenMutation,
@@ -27,6 +29,11 @@ export const YourSellerInfo: FC = () => {
 	const phone = useSelector((state: RootState) => state.userReducer.phone);
 	const surname = useSelector((state: RootState) => state.userReducer.surname);
 	const avatar = useSelector((state: RootState) => state.userReducer.avatar);
+
+	const [currName, setCurrName] = useState<string>(name);
+	const [currSurname, setCurrSurname] = useState<string>(surname);
+	const [currPhone, setCurrPhone] = useState<string>(phone);
+	const [currCity, setCurrCity] = useState<string>(city);
 
 	const accessToken = useSelector(
 		(state: RootState) => state.userReducer.access_token
@@ -81,6 +88,29 @@ export const YourSellerInfo: FC = () => {
 								console.log('token upload');
 								dispatch(setAccessToken(newToken));
 								localStorage.setItem('token', newToken.access_token);
+								updateDateUSer({
+									body: {
+										city: cityControll.current?.value,
+										name: nameContoll.current?.value,
+										surname: surnameContoll.current?.value,
+										phone: phoneControll.current?.value,
+									},
+									accessToken: token as string,
+								})
+									.unwrap()
+									.then((user) => {
+										console.log(user);
+										dispatch(
+											setUser({
+												email: user.email,
+												name: user.name,
+												surname: user.surname,
+												city: user.city,
+												phone: user.phone,
+												id: user.id,
+											})
+										);
+									});
 							})
 							.catch(() => {
 								<Link to="/login"></Link>;
@@ -101,9 +131,8 @@ export const YourSellerInfo: FC = () => {
 						) : (
 							<NothingImage />
 						)}
-						<ModalControl id='uploadAvatar' modal={<ModalUploadAvatar/>}>
-						<p style={{ color: '#009ee4' }}>Заменить</p>
-
+						<ModalControl id="uploadAvatar" modal={<ModalUploadAvatar2 />}>
+							<p style={{ color: '#009ee4' }}>Заменить</p>
 						</ModalControl>
 					</S.SubBoxAvatar>
 					<S.SubBoxInfo>
@@ -114,17 +143,20 @@ export const YourSellerInfo: FC = () => {
 										<S.SellerName>Имя</S.SellerName>
 										<InputPlaceBlack
 											type="text"
-											placeholder={name}
-											required
+											value={currName}
 											ref={nameContoll}
+											onChange={(e) => setCurrName(e.target.value)}
 										></InputPlaceBlack>
 									</div>
 									<div>
 										<S.SellerName>Фамилия</S.SellerName>
 										<InputPlaceBlack
 											type="text"
-											placeholder={surname}
+											value={currSurname}
 											ref={surnameContoll}
+											onChange={(e) =>
+												setCurrSurname(e.target.value)
+											}
 										></InputPlaceBlack>
 									</div>
 								</S.Info1>
@@ -133,16 +165,18 @@ export const YourSellerInfo: FC = () => {
 										<S.SellerName>Город</S.SellerName>
 										<InputPlaceBlack
 											type="text"
-											placeholder={city}
+											value={currCity}
 											ref={cityControll}
+											onChange={(e) => setCurrCity(e.target.value)}
 										></InputPlaceBlack>
 									</div>
 									<div>
 										<S.SellerName>Телефон</S.SellerName>
 										<InputPlaceBlack
 											type="number"
-											placeholder={phone}
+											value={currPhone}
 											ref={phoneControll}
+											onChange={(e) => setCurrPhone(e.target.value)}
 										></InputPlaceBlack>
 									</div>
 								</S.Info2>
